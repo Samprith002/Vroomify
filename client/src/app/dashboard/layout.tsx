@@ -25,11 +25,11 @@ export default function DashLayout({ children }: { children: ReactNode }) {
         <div className="p-5 flex flex-col w-full h-full items-center shadow-xl gap-2">
           <div className={cn("text-3xl w-full px-5 py-3 font-semibold", orbitron)}>Dashboard</div>
           <DashboardListItem label="Orders" link="orders" icon={getIcon(CarIcon)} />
-          <DashboardListItem label="Materials" link="materials" icon={getIcon(ComponentIcon)} />
           <DashboardListItem label="Refills" link="refills" icon={getIcon(CogIcon)} />
           <DashboardListItem label="Inventory" link="inventory" icon={getIcon(BoxesIcon)} />
-          <DashboardListItem label="Models" link="models" icon={getIcon(CarFrontIcon)} />
           <DashboardListItem label="Warehouse" link="warehouse" icon={getIcon(WarehouseIcon)} />
+          <DashboardListItem label="Materials" link="materials" icon={getIcon(ComponentIcon)} />
+          <DashboardListItem label="Models" link="models" icon={getIcon(CarFrontIcon)} />
         </div>
         <div className="w-full h-full col-span-3">{children}</div>
       </div>

@@ -29,7 +29,7 @@ export default function DashboardListItem({ label, link, icon }: Props) {
       )}
     >
       {icon}
-      <div className={cn("text-2xl font-light", orbitron)}>{label}</div>
+      <div className={cn("text-xl font-light", orbitron)}>{label}</div>
     </Link>
   );
 }
