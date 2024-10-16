@@ -1,4 +1,4 @@
-# AI for Smart Manufacturing Project (not named)
+# Vroomify
 
 ## Requirements
 
