@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Model } from "@/types";
 import { modelMutate } from "@/utils/atoms";
-import { createModel, getMaterials } from "@/utils/fetchers";
+import { createModel, getMaterials, updateModel } from "@/utils/fetchers";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useAtom } from "jotai";
@@ -25,22 +25,28 @@ import {
   BadgeIndianRupeeIcon,
   CalendarIcon,
   DotIcon,
+  PencilIcon,
   PlusCircleIcon,
   TimerIcon,
   Trash2Icon,
 } from "lucide-react";
-import { useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import useSWR from "swr";
 import { twJoin } from "tailwind-merge";
 import { z } from "zod";
 
-export default function CreateModelCard({ models }: { models: Model[] }) {
+const EditModelDialog = memo(({ model }: { model: Model }) => {
   const { data: materials } = useSWR("materials", getMaterials);
   const [mutate] = useAtom(modelMutate);
 
-  const [selected, setSelected] = useState<Record<string, string>>({});
+  const [selected, setSelected] = useState<Record<string, string>>(
+    Object.fromEntries(
+      Object.entries(model.materials).map((x) => [x[0], x[1].toString()])
+    )
+  );
+
   const [open, setOpen] = useState(false);
 
   const formSchema = z.object({
@@ -53,10 +59,18 @@ export default function CreateModelCard({ models }: { models: Model[] }) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: model.name,
+      year: model.year.toString(),
+      materials: selected,
+      price: model.price.toString(),
+      deliveryTime: model.deliveryTime.toString(),
+    },
   });
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    const model: Omit<Model, "id"> = {
+    const mod: Model = {
+      id: model.id,
       name: data.name,
       year: parseInt(data.year),
       price: parseInt(data.price),
@@ -64,12 +78,13 @@ export default function CreateModelCard({ models }: { models: Model[] }) {
       materials: {},
     };
 
-    model.materials = Object.fromEntries(
+    mod.materials = Object.fromEntries(
       Object.entries(data.materials).map((x) => [x[0], parseInt(x[1])])
     );
 
-    await createModel(model);
-    toast.success("Model created successfully!");
+    console.log(mod);
+    await updateModel(mod);
+    toast.success("Model updated successfully!");
     if (typeof mutate === "function") {
       mutate();
     }
@@ -85,21 +100,14 @@ export default function CreateModelCard({ models }: { models: Model[] }) {
         setOpen(o);
       }}
     >
-      <DialogTrigger
-        className={models.length % 2 === 0 ? "col-span-2" : "col-span-1"}
-      >
-        <Card
-          className={twJoin(
-            "w-full h-full shadow-none border-black border-dashed text-xl cursor-pointer p-6 py-10"
-          )}
-        >
-          <CardContent className="w-full h-full flex items-center justify-center gap-2 pb-0">
-            <PlusCircleIcon size={25} /> Add Model
-          </CardContent>
-        </Card>
+      <DialogTrigger>
+        <PencilIcon
+          size={20}
+          className="hidden group-hover:inline-block cursor-pointer"
+        />
       </DialogTrigger>
       <DialogContent>
-        <DialogTitle>Create a model</DialogTitle>
+        <DialogTitle>Edit a model</DialogTitle>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
@@ -191,7 +199,7 @@ export default function CreateModelCard({ models }: { models: Model[] }) {
                   <FormLabel>Materials Required</FormLabel>
                   <FormControl>
                     <div className="flex flex-col items-center w-full gap-2">
-                      {Object.entries(selected).map(([id, val]) => (
+                      {Object.entries(field.value).map(([id, val]) => (
                         <div className="flex items-center justify-between w-full">
                           <div className="flex items-center gap-2">
                             <DotIcon size={20} />
@@ -269,4 +277,6 @@ export default function CreateModelCard({ models }: { models: Model[] }) {
       </DialogContent>
     </Dialog>
   );
-}
+});
+
+export default EditModelDialog;

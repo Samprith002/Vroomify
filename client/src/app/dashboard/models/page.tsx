@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { modelMutate } from "@/utils/atoms";
+import { loaderAtom, modelMutate } from "@/utils/atoms";
 import { getModels } from "@/utils/fetchers";
 import { orbitron } from "@/utils/fonts";
 import { useAtom } from "jotai";
@@ -17,6 +17,11 @@ export default function Models() {
   useEffect(() => {
     if (mutModels) setMutate(() => mutModels);
   }, [mutModels]);
+
+  const [, setLoading] = useAtom(loaderAtom);
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   return (
     <div className="p-20 flex flex-col w-full h-full">

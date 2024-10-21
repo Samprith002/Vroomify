@@ -51,3 +51,16 @@ export async function createModel(mod: Omit<Model, "id">) {
   );
   return res.data
 }
+
+export async function updateModel(mod: Model) {
+  const res = await axios.patch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/model/update`,
+    mod
+  );
+  return res.data
+}
+
+export async function deleteModel(id: string) {
+  const res = await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/model/delete?id=${id}`)
+  return res.data
+}

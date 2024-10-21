@@ -13,7 +13,7 @@ import { PlusCircleIcon } from "lucide-react";
 import { twJoin } from "tailwind-merge";
 import CreateMaterialDialog from "./CreateMaterialDialog";
 import { useAtom } from "jotai";
-import { mutator } from "@/utils/atoms";
+import { loaderAtom, mutator } from "@/utils/atoms";
 
 export default function Materials() {
   const { data: materials, mutate: mutMaterials } = useSWR(
@@ -21,6 +21,11 @@ export default function Materials() {
     getMaterials
   );
   const [mutate, setMutate] = useAtom(mutator);
+
+  const [, setLoading] = useAtom(loaderAtom);
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
     if (mutMaterials) setMutate(() => mutMaterials);
