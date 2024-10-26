@@ -1,4 +1,4 @@
-import { Material, Model } from "@/types";
+import { InventoryPair, Material, Model } from "@/types";
 import axios from "axios";
 
 export async function getMaterials() {
@@ -62,5 +62,33 @@ export async function updateModel(mod: Model) {
 
 export async function deleteModel(id: string) {
   const res = await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/model/delete?id=${id}`)
+  return res.data
+}
+
+
+export async function listPairs() {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/inventory/list`)
+  return res.data.pairs as InventoryPair[]
+}
+
+
+export async function createPair(pair: InventoryPair) {
+  const res = await axios.post(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/inventory/create`,
+    pair
+  );
+  return res.data
+}
+
+export async function updatePair(pair: InventoryPair) {
+  const res = await axios.patch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/inventory/update`,
+    pair
+  );
+  return res.data
+}
+
+export async function deletePair(key: string) {
+  const res = await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/inventory/delete?key=${key}`)
   return res.data
 }

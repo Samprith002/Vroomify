@@ -14,3 +14,8 @@ export interface Model {
   price: number;
   deliveryTime: number;
 }
+
+export interface InventoryPair {
+  key: string;
+  value: string;
+}
