@@ -21,7 +21,7 @@ export default function Home() {
   useEffect(() => {
     const startCarAnimation = async () => {
       carControls.start({
-        x: 210,
+        x: 220,
         transition: { duration: 3 },
       });
     };
@@ -47,19 +47,36 @@ export default function Home() {
   }, [carControls, textControls, x]);
 
   return (
-    <div className={cn("w-screen h-screen flex flex-col items-center justify-center", raleway)}>
+    <div
+      className={cn(
+        "w-screen h-screen flex flex-col items-center justify-center"
+      )}
+    >
       <motion.div style={{ x }} initial={{ x: "-75vw" }} animate={carControls}>
         <CarIcon size={50} id="car" />
       </motion.div>
 
       <motion.div initial={{ opacity: 0 }} animate={textControls}>
-        <h1 className={cn("text-8xl font-bold", audiowide)}>Vroomify</h1>
+        <h1 className={cn("text-8xl font-bold font-audiowide")}>Vroomify</h1>
       </motion.div>
-      <motion.div className="mt-2 mb-5" initial={{ opacity: 0 }} animate={textControls}>
-        <span className="text-2xl">Revving up production, one gear at a time.</span>
+      <motion.div
+        className="mt-2 mb-5"
+        initial={{ opacity: 0 }}
+        animate={textControls}
+      >
+        <span className={cn("text-2xl font-raleway")}>
+          Revving up production, one gear at a time.
+        </span>
       </motion.div>
-      <motion.div className="mt-5" initial={{ opacity: 0 }} animate={buttonControls}>
-        <Link href={'/dashboard'} className="px-7 py-3 text-lg bg-black text-white rounded-md border-black transition hover:bg-gray-900 duration-300 ease-in-out">
+      <motion.div
+        className="mt-5"
+        initial={{ opacity: 0 }}
+        animate={buttonControls}
+      >
+        <Link
+          href={"/dashboard"}
+          className="px-7 py-3 text-lg bg-black text-white rounded-md border-black transition hover:bg-gray-900 duration-300 ease-in-out"
+        >
           Dashboard
         </Link>
       </motion.div>

@@ -2,7 +2,6 @@
 
 import { cn } from "@/lib/utils";
 import { loaderAtom } from "@/utils/atoms";
-import { audiowide, orbitron } from "@/utils/fonts";
 import { useAtom } from "jotai";
 import { LucideIcon } from "lucide-react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
@@ -35,7 +34,7 @@ export default function DashboardListItem({ label, link, icon }: Props) {
       )}
     >
       {icon}
-      <div className={cn("text-xl font-light", orbitron)}>{label}</div>
+      <div className="text-xl font-light font-orbitron">{label}</div>
     </div>
   );
 }

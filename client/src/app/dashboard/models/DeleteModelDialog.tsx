@@ -9,9 +9,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { modelMutate, mutator } from "@/utils/atoms";
-import { deleteMaterial, deleteModel } from "@/utils/fetchers";
+import { modelMutate } from "@/utils/atoms";
+import { deleteModel } from "@/utils/fetchers";
 import { useAtom } from "jotai";
 import { Trash2Icon } from "lucide-react";
 import { toast } from "sonner";

@@ -25,7 +25,7 @@ export default function Models() {
 
   return (
     <div className="p-20 flex flex-col w-full h-full">
-      <h1 className={cn("text-5xl font-semibold", orbitron)}>Models</h1>
+      <h1 className="text-5xl font-semibold font-orbitron">Models</h1>
       {models ? (
         <div className="w-full mt-10 grid grid-cols-2 gap-3">
           {models.map((mod) => (

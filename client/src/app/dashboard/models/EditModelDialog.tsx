@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   DropdownMenu,
@@ -17,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Model } from "@/types";
 import { modelMutate } from "@/utils/atoms";
-import { createModel, getMaterials, updateModel } from "@/utils/fetchers";
+import { getMaterials, updateModel } from "@/utils/fetchers";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useAtom } from "jotai";
@@ -30,11 +29,10 @@ import {
   TimerIcon,
   Trash2Icon,
 } from "lucide-react";
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import useSWR from "swr";
-import { twJoin } from "tailwind-merge";
 import { z } from "zod";
 
 const EditModelDialog = memo(({ model }: { model: Model }) => {

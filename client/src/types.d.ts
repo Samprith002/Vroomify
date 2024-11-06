@@ -19,3 +19,11 @@ export interface InventoryPair {
   key: string;
   value: string;
 }
+
+export interface Order {
+  id: string;
+  mod_id: string;
+  given_at: string;
+  delivered_at: number;
+  status: number;
+}

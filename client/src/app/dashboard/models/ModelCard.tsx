@@ -1,8 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Material, Model } from "@/types";
-import { getMaterial } from "@/utils/fetchers";
+import { Model } from "@/types";
 import { BadgeIndianRupeeIcon, CalendarIcon, TimerIcon } from "lucide-react";
-import { useEffect, useState } from "react";
 import EditModelDialog from "./EditModelDialog";
 import DeleteModelDialog from "./DeleteModelDialog";
 

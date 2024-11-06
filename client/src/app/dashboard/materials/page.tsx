@@ -33,7 +33,7 @@ export default function Materials() {
 
   return (
     <div className="p-20 flex flex-col w-full h-full">
-      <h1 className={cn("text-5xl font-semibold", orbitron)}>Materials</h1>
+      <h1 className="text-5xl font-semibold font-orbitron">Materials</h1>
 
       {materials ? (
         <div className="w-full mt-10 grid grid-cols-2 gap-3">

@@ -14,7 +14,7 @@ export default function Refills() {
 
   return (
     <div className="p-20 flex flex-col w-full h-full">
-      <h1 className={cn("text-5xl font-semibold", orbitron)}>Refills</h1>
+      <h1 className="text-5xl font-semibold font-orbitron">Refills</h1>
     </div>
   );
 }
