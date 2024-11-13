@@ -27,3 +27,12 @@ export interface Order {
   delivered_at: number;
   status: number;
 }
+
+export interface Refill {
+  id: string;
+  mat_id: string;
+  given_at: string;
+  delivered_at: string;
+  status: string;
+  
+}

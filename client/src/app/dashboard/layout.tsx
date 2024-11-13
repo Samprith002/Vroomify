@@ -1,5 +1,3 @@
-import { cn } from "@/lib/utils";
-import { audiowide, orbitron, raleway } from "@/utils/fonts";
 import { ReactNode } from "react";
 import DashboardListItem from "../components/DashboardListItem";
 import {
@@ -8,21 +6,20 @@ import {
   CarIcon,
   CogIcon,
   ComponentIcon,
-  LayoutDashboardIcon,
   WarehouseIcon,
 } from "lucide-react";
 import getIcon from "@/utils/getIcon";
 
 export default function DashLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col w-screen h-screen justify-center items-center font-raleway">
+    <div className="flex flex-col w-screen h-screen justify-center items-center font-raleway overflow-hidden">
       <div className="w-full p-7 py-5 fixed top-0 left-0 flex items-center justify-between bg-black shadow-lg">
         <h2 className="text-4xl font-bold text-white font-audiowide">
           Vroomify
         </h2>
       </div>
-      <div className="w-full h-full grid grid-cols-4 mt-20">
-        <div className="p-5 flex flex-col w-full h-full items-center shadow-xl gap-2">
+      <div className="w-full h-full grid grid-cols-4 mt-20 ">
+        <div className="p-5 flex flex-col h-full items-center shadow-xl gap-2 w-full">
           <div className="text-3xl w-full px-5 py-3 font-semibold font-orbitron">
             Dashboard
           </div>
@@ -42,11 +39,6 @@ export default function DashLayout({ children }: { children: ReactNode }) {
             icon={getIcon(BoxesIcon)}
           />
           <DashboardListItem
-            label="Warehouse"
-            link="warehouse"
-            icon={getIcon(WarehouseIcon)}
-          />
-          <DashboardListItem
             label="Materials"
             link="materials"
             icon={getIcon(ComponentIcon)}
@@ -57,7 +49,9 @@ export default function DashLayout({ children }: { children: ReactNode }) {
             icon={getIcon(CarFrontIcon)}
           />
         </div>
-        <div className="w-full h-full col-span-3">{children}</div>
+        <div className="w-full h-full col-span-3 overflow-y-auto">
+          {children}
+        </div>
       </div>
     </div>
   );
