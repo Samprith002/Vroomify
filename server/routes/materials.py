@@ -24,12 +24,17 @@ async def list_materials():
 
 @materials.post("/create")
 async def create_material(material: Material):
+  id = uuid4().hex
   db.materials.insert_one({
-    'id': uuid4().hex,
+    'id': id,
     'name': material.name,
     'maxQty': material.maxQty,
     'price': material.price,
     'deliveryTime': material.deliveryTime
+  })
+  db.inventory.insert_one({
+    "key": id,
+    "value": 1000
   })
   return { 'message': f"Material {material.name} created successfully!" }
 

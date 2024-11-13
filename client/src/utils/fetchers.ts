@@ -114,3 +114,10 @@ export async function createOrder(id: string) {
   );
   return res.data;
 }
+
+export async function listRefills() {
+  const res = await axios.get(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/refill/list`
+  );
+  return res.data.orders as Order[];
+}

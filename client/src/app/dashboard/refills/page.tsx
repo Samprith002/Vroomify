@@ -1,16 +1,17 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { loaderAtom } from "@/utils/atoms";
-import { orbitron } from "@/utils/fonts";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
+import useSWR from "swr";
 
 export default function Refills() {
   const [, setLoading] = useAtom(loaderAtom);
   useEffect(() => {
     setLoading(false);
   }, []);
+
+  const { data: refills } = useSWR("refills");
 
   return (
     <div className="p-20 flex flex-col w-full h-full">

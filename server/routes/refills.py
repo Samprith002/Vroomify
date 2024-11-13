@@ -23,7 +23,7 @@ async def test_refill():
 
 @refills.post("/create")
 async def create_refill(ref: BaseRefill):
-  await db.refills.insert_one({
+  db.refills.insert_one({
     "id": uuid4().hex,
     "mat_id": ref.mat_id,
     "given_at": int(time() * 1000),
